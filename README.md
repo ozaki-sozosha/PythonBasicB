@@ -49,5 +49,11 @@ for file in files:
 
 練習問題：ファイルに保存する機能を使って、アプリケーションを永続化する
 
+##　クラスとオブジェクト
+
+## アルゴリズム
+
+## Excelの操作
+
 ## 課題イメージ
 <img src="./images/PythonB.png" width="50%">
