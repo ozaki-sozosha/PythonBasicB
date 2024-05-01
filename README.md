@@ -1,6 +1,6 @@
 # PythonBasicB
 
-##　ファイルの取り扱い
+## ファイルの取り扱い
 ```
 //ファイルを開いて中身を読み取る
 with open ("sample.txt","r",encoding="utf-8") as file:
