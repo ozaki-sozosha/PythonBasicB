@@ -49,7 +49,74 @@ for file in files:
 
 練習問題：ファイルに保存する機能を使って、アプリケーションを永続化する
 
-##　クラスとオブジェクト
+## クラスとオブジェクト
+
+クラスはオブジェクトの設計図であり、保持するデータ(変数)と振る舞い(関数・メソッド)をひとまとめにしたもの。  
+```
+# クラス定義
+class Ticket:
+    event_name = "肥後橋夏フェス"
+    sheet_no = "A200"
+    price = 5000
+
+    def show_detail(self):
+        return f"公演名:{self.event_name} 座席番号:{self.sheet_no} チェット代金:{self.price}"
+    
+# 変数tiにクラス設計図から生成したオブジェクトを代入(インスタンス化)
+ti = Ticket()
+# インスタンスのメソッドを実行
+print(ti.show_detail())
+```
+
+### コンストラクター
+クラスをインスタンス化する時にだけ自動的に実行されるメソッドをコンストラクタという。  
+逆にインスタンスが消滅するときにだけ自動的に実行されるメソッドをデストラクタという。 
+```
+class Ticket:
+    # コンストラクタ
+    def __init__(self, event_name,sheet_no,price):
+        self.event_name = event_name
+        self.sheet_no = sheet_no
+        self.price = price
+
+    def show_detail(self):
+        return f"公演名:{self.event_name} 座席番号:{self.sheet_no} チェット代金:{self.price}"
+```
+
+### 継承
+クラス(オブジェクトの設計図)からその属性を受け継ぎ、派生したオブジェクト作るとこを継承という。  
+```
+# Ticketを継承してVipTicket(招待チケット)を作る
+class VipTicket(Ticket):
+    # コンストラクタ
+    def __init__(self, event_name,sheet_no):
+        self.event_name = event_name
+        self.sheet_no = sheet_no
+        self.price = 0
+
+vti = VipTicket("肥後橋夏フェス","Z001")
+# Ticketを継承しているため、show_detailメソッドはVipTicketクラスに定義しなくても備えている
+print(vti.show_detail())
+```
+### メソッドのオーバーライド
+```
+class VipTicket(Ticket):
+    # コンストラクタ
+    def __init__(self, event_name,sheet_no):
+        self.event_name = event_name
+        self.sheet_no = sheet_no
+        self.price = 0
+    # メソッドを上書き(オーバーライド)
+    def show_detail(self):
+        return f"公演名:{self.event_name} 座席番号:{self.sheet_no} チェット代金:招待"
+# 継承クラスのインスタンス化
+vti = VipTicket("肥後橋夏フェス","Z001")
+# 継承クラスのメソッド実行
+print(vti.show_detail())
+# 親クラスのメソッド実行
+print(super(VipTicket,vti).show_detail())
+```
+
 
 ## アルゴリズム
 
