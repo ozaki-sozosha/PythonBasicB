@@ -190,5 +190,62 @@ def factorial(n):
 
 ## Excelの操作
 
+###　ライブラリのインストール
+コンソールorターミナル画面にて 
+```
+pip install openpyxl
+```
+
+### ライブラリのインポート
+```
+import openpyxl
+```
+
+### ファイルの操作
+新しいワークブックを作成してsample.xlsxとして保存
+```
+workbook = openpyxl.Workbook()
+workbook.save("sample.xlsx")
+```
+
+既存のファイルnumber.xlsxを編集して保存
+```
+workbook = openpyxl.load_workbook('number.xlsx')
+# 編集作業をする
+workbook.save('number.xlsx')
+```
+
+### ワークシートの操作
+ワークシートを選択
+```
+# シート名を指定
+worksheet = workbook["Sheet"]
+# アクティブなシートを選択
+worksheet = workbook.active
+# シート名の一覧を取得
+workbook.sheetnames
+```
+
+### セルの操作
+```
+# A1セルを取得
+value = worksheet['A1'].value
+value = worksheet.cell(row=1,col=1).value
+# A1セルに文字列を書き込む
+worksheet['A1'].value = "創造社デザイン専門学校"
+worksheet.cell(row=1,col=1).value = "Sozosha"
+```
+
+### 重要メソッド
+```
+# シートの最大行(最終データが記載されている行)
+maxrow = worksheet.max_row
+# シートの最大列(最終データが記載されている列)
+maxcol = worksheet.max_column
+# シートの最小行(最初のデータが記載されている行)
+minrow = worksheet.min_row
+# シートの最大列(最終データが記載されている列)
+minrcol = worksheet.min_column
+
 ## 課題イメージ
 <img src="./images/PythonB.png" width="50%">
