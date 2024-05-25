@@ -230,10 +230,10 @@ workbook.sheetnames
 ```
 # A1セルを取得
 value = worksheet['A1'].value
-value = worksheet.cell(row=1,col=1).value
+value = worksheet.cell(row=1,column=1).value
 # A1セルに文字列を書き込む
 worksheet['A1'].value = "創造社デザイン専門学校"
-worksheet.cell(row=1,col=1).value = "Sozosha"
+worksheet.cell(row=1,column=1).value = "Sozosha"
 ```
 
 ### 重要メソッド
@@ -246,6 +246,47 @@ maxcol = worksheet.max_column
 minrow = worksheet.min_row
 # シートの最大列(最終データが記載されている列)
 minrcol = worksheet.min_column
+```
+
+
+### 練習問題
+```
+#下記の辞書型データを科目をA列、成績をB列に書き込み、exam.xlsxとして保存します。
+exam = {"英語":80, "国語":78, "数学":65, "日本史":55, "生物":90}
+#新規excelファイル作成
+workbook = openpyxl.Workbook()
+worksheet = workbook.active
+
+#科目の一覧
+subjects = exam.keys()
+for index, subject in enumerate(subjects):
+    worksheet.cell(row=index+1,column=1).value = subject
+
+#成績の一覧
+scores = exam.values()
+for index, score in enumerate(scores):
+    worksheet.cell(row=index+1,column=2).value = score
+
+workbook.save('exam.xlsx')
+```
+
+```
+# 作成したexam.xlsxを開き、B10セルに成績の合計、B11セルに平均を計算する
+workbook = openpyxl.load_workbook('exam.xlsx')
+worksheet = workbook.active
+
+#データを読み取る
+examdata = []
+for i in range(1,worksheet.max_row+1):
+    examdata.append(worksheet.cell(row=i,column=2).value)
+
+worksheet["A10"].value = "合計"
+worksheet["B10"].value = sum(examdata)
+worksheet["A11"].value = "平均"
+worksheet["B11"].value = sum(examdata)/len(examdata)
+
+workbook.save('exam.xlsx')
+```
 
 ## 課題イメージ
 <img src="./images/PythonB.png" width="50%">
