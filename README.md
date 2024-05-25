@@ -190,7 +190,7 @@ def factorial(n):
 
 ## Excelの操作
 
-###　ライブラリのインストール
+### ライブラリのインストール
 コンソールorターミナル画面にて 
 ```
 pip install openpyxl
