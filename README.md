@@ -223,7 +223,11 @@ worksheet = workbook["Sheet"]
 # アクティブなシートを選択
 worksheet = workbook.active
 # シート名の一覧を取得
-workbook.sheetnames
+ws_names = workbook.sheetnames
+# 新しいシートを作成
+worksheet2 = workbook.create_sheet()
+# シート名変更
+worksheet.title = '変更したいシート名'
 ```
 
 ### セルの操作
@@ -288,5 +292,71 @@ worksheet["B11"].value = sum(examdata)/len(examdata)
 workbook.save('exam.xlsx')
 ```
 
-## 課題イメージ
-<img src="./images/PythonB.png" width="50%">
+## 日付の扱い
+```
+#日付や日時の扱い方
+import datetime
+
+# datetime.datetimeオブジェクト
+# 今日の日付、現在時間を取得
+current = datetime.datetime.now()
+print(current)
+
+# datetime.dateオブジェクト
+today = datetime.date.today()
+```
+
+```
+# 指定した日時をデータ化する
+dt1 = datetime.datetime(2023,5,1,13,0,0)
+print(dt1)
+# 時刻は省略化(00:00:00として処理される)
+dt2 = datetime.datetime(2024,3,3)
+print(dt2)
+# 指定日をdateオブジェクトでデータ化
+d1 = datetime.date(2024,5,5)
+```
+
+```
+# datetimeオブジェクト、dateオブジェクトを文字列に変換
+dt1_j = dt1.strftime('%Y年%m月%d日 %H時%M分%S秒')
+print(dt1_j)
+```
+### 書式コード
+%d: 0埋めした10進数で表記した月中の日にち
+%m: 0埋めした10進数で表記した月
+%y: 0埋めした10進数で表記した西暦の下2桁
+%Y: 0埋めした10進数で表記した西暦4桁
+%H: 0埋めした10進数で表記した時 （24時間表記）
+%I: 0埋めした10進数で表記した時 （12時間表記）
+%M: 0埋めした10進数で表記した分
+%S: 0埋めした10進数で表記した秒
+%f: 0埋めした10進数で表記したマイクロ秒（6桁）
+%A: ロケールの曜日名
+%a: ロケールの曜日名（短縮形）
+%B: ロケールの月名
+%b: ロケールの月名（短縮形）
+%j: 0埋めした10進数で表記した年中の日にち（正月が'001'）
+%U: 0埋めした10進数で表記した年中の週番号 （週の始まりは日曜日）
+%W: 0埋めした10進数で表記した年中の週番号 （週の始まりは月曜日）
+
+```
+# 文字列としての日付
+bd1_j = '1968年03月30日'
+bd2_j = '1968/05/01'
+
+# 文字列としての比較
+print(bd1_j < bd2_j)
+
+# 文字列から日時オブジェクトを生成
+format1 = '%Y年%m月%d日'
+bd1 = datetime.datetime.strptime(bd1_j,format1)
+print(bd1)
+
+format2 = '%Y/%m/%d'
+bd2 = datetime.datetime.strptime(bd2_j,format2)
+print(bd2)
+
+# 日時オブジェクトとしての比較
+print(bd1 < bd2)
+```
